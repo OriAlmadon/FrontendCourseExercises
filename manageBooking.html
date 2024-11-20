@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bookings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 40px;
+            color: #333;
+        }
+        .booking-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .booking-container h2 {
+            font-size: 24px;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+        .booking-container p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555;
+        }
+        .booking-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Bookings</h1>
+    <div id="bookings"></div>
+    <footer>
+        <a href="index.html">Return to Home</a>
+    </footer>
+
+    <script>
+        // Load bookings from localStorage
+        function loadBookings() {
+            const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+            const bookingsContainer = document.getElementById("bookings");
+
+            bookingsContainer.innerHTML = ""; // Clear existing bookings
+
+            if (bookings.length === 0) {
+                bookingsContainer.innerHTML = `<p>You have no bookings yet.</p>`;
+                return;
+            }
+
+            bookings.forEach(booking => {
+                const bookingDiv = document.createElement("div");
+                bookingDiv.className = "booking-container";
+
+                const destinationImage = getDestinationImage(booking.flight.destination);
+
+                bookingDiv.innerHTML = `
+                    <h2>${booking.flight.origin} → ${booking.flight.destination}</h2>
+                    <p><strong>Boarding:</strong> ${booking.flight.boardingDate} ${booking.flight.boardingTime}</p>
+                    <p><strong>Landing:</strong> ${booking.flight.arrivalDate} ${booking.flight.arrivalTime}</p>
+                    <p><strong>No. of passengers:</strong> ${booking.passengers.length}</p>
+                    <img src="${destinationImage}" alt="Destination Image">
+                `;
+
+                bookingsContainer.appendChild(bookingDiv);
+            });
+        }
+
+        // Function to get a sample destination image (replace with real images or APIs as needed)
+        function getDestinationImage(destination) {
+            const destinationImages = {
+                "Tel Aviv": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Ben_Gurion_Airport_Terminal_3.jpg",
+                "Krakow": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Krak%C3%B3w_Stare_Miasto_Plan.JPG",
+                "New York": "https://upload.wikimedia.org/wikipedia/commons/e/e1/JFK_Aerial_Nov_14_2018.jpg",
+                "London": "https://upload.wikimedia.org/wikipedia/commons/f/f6/LHR_Aerial.jpg"
+            };
+            return destinationImages[destination] || "https://via.placeholder.com/400?text=No+Image+Available";
+        }
+
+        // Load bookings when the page loads
+        window.onload = loadBookings;
+    </script>
+</body>
+</html>

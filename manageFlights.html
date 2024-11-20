@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 50px;
+            color: #333;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+            font-size: 20px;
+        }
+        td {
+            font-size: 16px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        #addFlightButton {
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #addFlightButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="h1">
+        <a href="index.html"> Ono Air </a> </h1> 
+    <h1>Flight Management</h1>
+    <button id="addFlightButton" onclick="navigateToAddFlight()">Add Flight</button>
+    <table id="flightTable">
+        <thead>
+            <tr>
+                <th>Flight No</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Boarding Date</th>
+                <th>Boarding Time</th>
+                <th>Arrival Date</th>
+                <th>Arrival Time</th>
+                <th>Seats</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Flight data will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Define the Flight class
+        class Flight {
+            constructor(flightNo, origin, destination, boardingDate, boardingTime, arrivalDate, arrivalTime, numberOfSeats) {
+                this.flightNo = flightNo;
+                this.origin = origin;
+                this.destination = destination;
+                this.boardingDate = boardingDate;
+                this.boardingTime = boardingTime;
+                this.arrivalDate = arrivalDate;
+                this.arrivalTime = arrivalTime;
+                this.numberOfSeats = numberOfSeats;
+            }
+        }
+
+        // Initial flights
+        const flights = [
+            new Flight("ON123", "Tel Aviv", "New York", "2024-12-01", "10:00 AM", "2024-12-01", "6:00 PM", 200),
+            new Flight("ON456", "London", "Paris", "2024-12-05", "3:00 PM", "2024-12-05", "5:00 PM", 150),
+            new Flight("ON789", "Tokyo", "Los Angeles", "2024-12-10", "9:00 AM", "2024-12-10", "11:00 AM", 300),
+        ];
+
+        // Save the initial flights to localStorage only if not already saved
+        if (!localStorage.getItem("flights")) {
+            localStorage.setItem("flights", JSON.stringify(flights));
+        }
+
+        // Fetch flights from localStorage and render them
+        function renderFlights() {
+            const tableBody = document.getElementById("flightTable").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            const savedFlights = JSON.parse(localStorage.getItem("flights"));
+
+            savedFlights.forEach(flight => {
+                const row = document.createElement("tr");
+
+                // Create and append cells
+                Object.values(flight).forEach(value => {
+                    const cell = document.createElement("td");
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+
+                // Append row to the table
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Navigate to the Add Flight page
+        function navigateToAddFlight() {
+            window.location.href = "addFlight.html";
+        }
+
+        // Render flights when the page loads
+        window.onload = renderFlights;
+    </script>
+    <footer style="position: fixed; bottom: 0; width: 100%; background-color: #007BFF; color: white; text-align: center; padding: 10px;">
+        <a href="help.html" style="color: white; text-decoration: none; font-size: 18px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Help-icon.svg" alt="Help Icon" style="width: 24px; height: 24px; vertical-align: middle;"> 
+            Need Help?
+        </a>
+    </footer>
+    
+</body>
+</html>

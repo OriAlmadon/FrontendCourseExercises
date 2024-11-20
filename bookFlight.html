@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Flight</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 40px;
+            color: #333;
+        }
+        .filter-container {
+            margin: 20px 0;
+        }
+        .filter-container input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .filter-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filter-container button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+            font-size: 20px;
+        }
+        td {
+            font-size: 16px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book a Flight</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-container">
+        <input type="text" id="filterOrigin" placeholder="Filter by Origin">
+        <input type="text" id="filterDestination" placeholder="Filter by Destination">
+        <button onclick="applyFilters()">Apply Filters</button>
+        <button onclick="clearFilters()">Clear Filters</button>
+    </div>
+
+    <!-- Flights Table -->
+    <table id="flightTable">
+        <thead>
+            <tr>
+                <th>Flight No</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Boarding Date</th>
+                <th>Boarding Time</th>
+                <th>Arrival Date</th>
+                <th>Arrival Time</th>
+                <th>Seats</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Flight data will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <footer>
+        <a href="index.html">Return to Home</a>
+    </footer>
+
+    <script>
+        let flights = [];
+
+        // Fetch flights from localStorage and store them in a variable
+        function loadFlights() {
+            flights = JSON.parse(localStorage.getItem("flights")) || [];
+            renderFlights(flights);
+        }
+
+        // Render flights in the table
+        function renderFlights(filteredFlights) {
+            const tableBody = document.getElementById("flightTable").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            filteredFlights.forEach((flight, index) => {
+                const row = document.createElement("tr");
+
+                // Create and append cells for each flight property
+                row.innerHTML = `
+                    <td>${flight.flightNo}</td>
+                    <td>${flight.origin}</td>
+                    <td>${flight.destination}</td>
+                    <td>${flight.boardingDate}</td>
+                    <td>${flight.boardingTime}</td>
+                    <td>${flight.arrivalDate}</td>
+                    <td>${flight.arrivalTime}</td>
+                    <td>${flight.numberOfSeats}</td>
+                    <td><button onclick="bookFlight(${index})">Book</button></td>
+                `;
+
+                // Append the row to the table
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Apply filters based on user input
+        function applyFilters() {
+            const originFilter = document.getElementById("filterOrigin").value.trim().toLowerCase();
+            const destinationFilter = document.getElementById("filterDestination").value.trim().toLowerCase();
+
+            const filteredFlights = flights.filter(flight => {
+                const matchesOrigin = !originFilter || flight.origin.toLowerCase().includes(originFilter);
+                const matchesDestination = !destinationFilter || flight.destination.toLowerCase().includes(destinationFilter);
+                return matchesOrigin && matchesDestination;
+            });
+
+            renderFlights(filteredFlights);
+        }
+
+        // Clear filters and show all flights
+        function clearFilters() {
+            document.getElementById("filterOrigin").value = "";
+            document.getElementById("filterDestination").value = "";
+            renderFlights(flights);
+        }
+
+        // Handle the booking action
+        function bookFlight(index) {
+            const selectedFlight = flights[index];
+            localStorage.setItem("selectedFlight", JSON.stringify(selectedFlight));
+            window.location.href = "bookAFlight.html";
+        }
+
+        // Load flights when the page loads
+        window.onload = loadFlights;
+    </script>
+</body>
+</html>
