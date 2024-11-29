@@ -57,12 +57,13 @@
     </style>
 </head>
 <body>
+    <h1 class="h1">
+        <a href="index.html"> Ono Air </a> 
+    </h1> 
     <h1>My Bookings</h1>
     <div id="bookings"></div>
     <footer>
         <a href="index.html">Return to Home</a>
-    </footer>
-
     <script>
         // Load bookings from localStorage
         function loadBookings() {
@@ -108,5 +109,10 @@
         // Load bookings when the page loads
         window.onload = loadBookings;
     </script>
+        <footer style="position: fixed; bottom: 0; width: 100%; background-color: #007BFF; color: white; text-align: center; padding: 10px;">
+            <a href="help.html" style="color: white; text-decoration: none; font-size: 18px;">
+                <img src="help-icon.png" alt="Help Icon" style="width: 24px; height: 24px; vertical-align: middle;"> 
+                Need Help?
+            </a>
 </body>
 </html>
