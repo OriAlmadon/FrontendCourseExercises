@@ -45,6 +45,7 @@
 <body>
     <h1 class="h1">
         <a href="index.html"> Ono Air </a> 
+    </h1>
     <h1>Add a New Destination</h1>
     <form id="addDestinationForm">
         <input type="text" id="destinationCode" placeholder="Destination Code" required>
@@ -68,8 +69,8 @@
                 imageUrl: document.getElementById("imageUrl").value,
             };
 
-            // Fetch existing destinations from localStorage
-            const destinations = JSON.parse(localStorage.getItem("destinations"));
+            // Fetch existing destinations from localStorage or initialize an empty array
+            const destinations = JSON.parse(localStorage.getItem("destinations")) || [];
 
             // Add the new destination to the array
             destinations.push(newDestination);
@@ -79,14 +80,14 @@
 
             // Redirect back to the destination management page
             alert("Destination added successfully!");
-            window.location.href = "destinationManagement.html";
+            window.location.href = "index.html";
         };
     </script>
-    </a>
     <footer style="position: fixed; bottom: 0; width: 100%; background-color: #007BFF; color: white; text-align: center; padding: 10px;">
         <a href="help.html" style="color: white; text-decoration: none; font-size: 18px;">
             <img src="help-icon.png" alt="Help Icon" style="width: 24px; height: 24px; vertical-align: middle;"> 
             Need Help?
         </a>
+    </footer>
 </body>
 </html>
