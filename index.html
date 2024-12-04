@@ -3,42 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מסך ראשי</title>
+    <title>Ono Air</title>
     <style>
-         h1 {
-            font-size: 120px;
-         }
-         p{
-            font-size: 40px;
-            text-align: center;
-         }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+        h1 a {
+            text-decoration: none;
+            color: #2c3e50;
+        }
+        h1 a:hover {
+            color: #e74c3c;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+        h2 a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        h2 a:hover {
+            color: #2980b9;
+        }
     </style>
 </head>
 <body>
-    <h1 class="h1">
-        <a href="index.html"> Ono Air </a> 
-    </h1> 
-    <p class="h2"> 
-        <a href="manageFlights.html"> Manage Flights </a>
-    </p>
-    <br/>
-    <p>
-     <a href="manageDestinations.html"> Manage Destinations</a>
-    </p>
-    <br/>
-    <p>
-    <a href="bookFlight.html"> Flight Booking</a>
-    </p>    
-    <br/>
-    <p>
-    <a href="manageBooking.html">  Booking Managment</a>
-    </p>
-    <footer style="position: fixed; bottom: 0; width: 100%; background-color: #007BFF; color: white; text-align: center; padding: 10px;">
-        <a href="help.html" style="color: white; text-decoration: none; font-size: 18px;">
-            <img src="help-icon.png" alt="Help Icon" style="width: 24px; height: 24px; vertical-align: middle;"> 
-            Need Help?
-        </a>
-    </footer>
-    
+    <h1><a href="index.html">Ono Air</a></h1>
+    <h2><a href="admin-manage-flights.html">Admin - Manage Flights</a></h2>
+    <h2><a href="admin-manage-destinations.html">Admin - Manage Destinations</a></h2>
+    <h2><a href="user-book-flight.html">User - Book a Flight</a></h2>
+    <h2><a href="user-manage-bookings.html">User - Manage Bookings</a></h2>
 </body>
+
+<footer>
+    <p>
+        Need help? Visit our 
+        <a href="help.html" style="color: #3498db; text-decoration: none;">Help Page</a>.
+    </p>
+</footer>
+
 </html>
