@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bookings - Ono Air</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        #bookingTable {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        #bookingTable th, #bookingTable td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        #bookingTable th {
+            background-color: #3498db;
+            color: white;
+        }
+        #bookingTable tbody tr:nth-child(even) {
+            background-color: #f4f4f9;
+        }
+        #bookingTable tbody tr:hover {
+            background-color: #d9e4f5;
+        }
+    </style>
+</head>
+<header style="background-color: #f4f4f9; padding: 20px; border-bottom: 2px solid #ccc;">
+    <h1 style="margin: 0; font-size: 2.5rem; text-align: left; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333;">
+        <a href="index.html" style="text-decoration: none; color: #333;">
+            Ono Air
+        </a>
+    </h1>
+</header>
+
+<body>
+    <h1>Manage Bookings</h1>
+    <table id="bookingTable">
+        <thead>
+            <tr>
+                <th>Flight No.</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Passenger Count</th>
+                <th>Passenger Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically populated here -->
+        </tbody>
+    </table>
+
+    <script src="data/bookings.js"></script>
+    <script src="data/flights.js"></script>
+    <script>
+        const bookingTableBody = document.querySelector('#bookingTable tbody');
+
+        // Function to get flight details by flight number
+        function getFlightDetails(flightNo) {
+            return flights.find((flight) => flight.flightNo === flightNo);
+        }
+
+        // Function to render the bookings table
+        function renderBookingsTable() {
+            bookingTableBody.innerHTML = ''; // Clear existing rows
+            bookings.forEach((booking) => {
+                const flightDetails = getFlightDetails(booking.flightNo);
+                if (!flightDetails) return; // Skip if flight not found
+
+                const passengerDetails = booking.passengerDetails
+                    .map((passenger, index) => `#${index + 1}: ${passenger.name} (Passport: ${passenger.passport})`)
+                    .join('<br>');
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${booking.flightNo}</td>
+                    <td>${flightDetails.origin}</td>
+                    <td>${flightDetails.destination}</td>
+                    <td>${flightDetails.boardingDate}</td>
+                    <td>${flightDetails.boardingTime}</td>
+                    <td>${booking.passengerCount}</td>
+                    <td>${passengerDetails}</td>
+                `;
+                bookingTableBody.appendChild(row);
+            });
+        }
+
+        // Initial rendering of the bookings table
+        renderBookingsTable();
+
+        // Listen for storage changes to update the table
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'bookings') {
+                const updatedBookings = JSON.parse(localStorage.getItem('bookings'));
+                bookings.length = 0; // Clear the original array
+                bookings.push(...updatedBookings); // Add the updated bookings
+                renderBookingsTable();
+            }
+        });
+    </script>
+</body>
+<footer>
+    <p>
+        Need help? Visit our 
+        <a href="help.html" style="color: #3498db; text-decoration: none;">Help Page</a>.
+    </p>
+</footer>
+</html>
