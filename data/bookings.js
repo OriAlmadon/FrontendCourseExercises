@@ -1,5 +1,30 @@
 // In-memory storage for bookings
-const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+const bookings = JSON.parse(localStorage.getItem('bookings')) || [
+    {
+        flightNo: "NYC123",
+        passengerCount: 2,
+        passengerDetails: [
+            { name: "John Doe", passport: "A12345678" },
+            { name: "Jane Smith", passport: "B98765432" }
+        ]
+    },
+    {
+        flightNo: "LHR789",
+        passengerCount: 1,
+        passengerDetails: [
+            { name: "Alice Johnson", passport: "C56789012" }
+        ]
+    },
+    {
+        flightNo: "NYC123",
+        passengerCount: 3,
+        passengerDetails: [
+            { name: "Bob Brown", passport: "D34567890" },
+            { name: "Charlie Green", passport: "E12345987" },
+            { name: "Diana White", passport: "F87654321" }
+        ]
+    }
+];
 
 // Function to save bookings to local storage
 function saveBookings() {
