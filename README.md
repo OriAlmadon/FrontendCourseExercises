@@ -2,7 +2,6 @@ Ono Air - Flight Management System
 Ono Air is a web-based flight management system designed for both administrators and users. Administrators can manage flights and destinations, while users can book flights and manage their bookings. The system includes comprehensive validations and a dynamic user interface.
 
 Project Structure
-
 OnoAir/
 │
 ├── index.html                    # Homepage for Ono Air
@@ -17,6 +16,7 @@ OnoAir/
 │   ├── bookings.js               # Script for booking data and validations
 │   ├── destinations.js           # Script for destinations data
 │
+
 Features
 Administrator Functionality
 Manage Flights:
