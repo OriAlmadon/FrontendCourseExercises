@@ -3,167 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help & Documentation</title>
+    <title>Help - Ono Air</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            text-align: center;
-            color: #333;
+            background-color: #f4f4f9;
         }
         h1 {
-            font-size: 36px;
+            text-align: center;
+            color: #2c3e50;
         }
-        h2 {
-            font-size: 28px;
-            color: #007BFF;
-            margin-top: 20px;
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h3 {
-            font-size: 22px;
-            color: #333;
-            margin-top: 15px;
+        section h2 {
+            color: #3498db;
+            margin-bottom: 10px;
         }
-        p, li {
-            font-size: 16px;
+        section p {
             line-height: 1.6;
-            color: #555;
+            margin-bottom: 15px;
         }
-        ul {
-            list-style-type: disc;
-            margin: 15px 0 15px 40px;
+        section ul {
+            margin: 10px 0;
+            padding-left: 20px;
+            list-style: disc;
         }
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
-            font-family: monospace;
-            font-size: 14px;
+        section ul li {
+            margin-bottom: 10px;
+        }
+        section ul li b {
+            text-decoration: underline;
         }
         footer {
-            text-align: center;
-            padding: 10px;
             margin-top: 20px;
-            background-color: #007BFF;
-            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
         }
         footer a {
-            color: white;
+            color: #3498db;
             text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Help & Documentation</h1>
-        <p>This page provides a guide to all the features and technical details of the web app. Use this as a reference for understanding and navigating the application.</p>
-
-        <h2>Features Overview</h2>
+    <h1>Help - Ono Air</h1>
+    <section>
+        <h2>1. Admin - Manage Flights</h2>
+        <p>
+            The "Manage Flights" page allows administrators to view, add, and manage all available flights. 
+            Here’s how to use this section:
+        </p>
         <ul>
-            <li><strong>Flight Management:</strong> Add, view, and manage flights. New flights are dynamically stored and displayed.</li>
-            <li><strong>Book a Flight:</strong> Filter flights by origin and destination, select one, and book it by providing passenger information.</li>
-            <li><strong>Booking Management:</strong> View all bookings made, including flight details, number of passengers, and a destination image.</li>
-            <li><strong>Dynamic Forms:</strong> Forms for passenger details adjust automatically based on the number of passengers entered.</li>
+            <li><b><u>Viewing Flights</u></b>: All flights are displayed in a table, showing details such as flight number, origin, destination, date, time, and number of seats.</li>
+            <li><b><u>Adding Flights</u></b>: Click the "Add Flight" button to navigate to the "Add Flight" page. Fill in flight details, including origin, destination, boarding and arrival times, and number of seats, then click "Submit."</li>
+            <li><b><u>Dynamic Updates</u></b>: Newly added flights will automatically appear in the "Manage Flights" table.</li>
         </ul>
 
-        <h2>How to Use the Site</h2>
-        <h3>1. Manage Flights</h3>
-        <p>Use the Flight Management page to add or view flights. Enter details such as flight number, origin, destination, and time. All added flights appear in a dynamic table.</p>
+        <h2>2. Admin - Manage Destinations</h2>
+        <p>
+            The "Manage Destinations" page is for administrators to handle all travel destinations. Follow these steps to use this page:
+        </p>
+        <ul>
+            <li><b><u>Viewing Destinations</u></b>: A list of existing destinations is displayed, including details such as destination name, airport name, and destination code.</li>
+            <li><b><u>Adding Destinations</u></b>: Use the form at the top of the page to add new destinations. Enter details like destination name, airport information, and a unique 3-letter destination code, then click "Submit."</li>
+            <li><b><u>Integration with Flights</u></b>: New destinations will automatically be available in the "Add Flight" page for selection.</li>
+        </ul>
 
-        <h3>2. Book a Flight</h3>
-        <p>Navigate to the Book a Flight page to filter and view available flights. Use the "Book" button to proceed to the booking form.</p>
+        <h2>3. User - Book a Flight</h2>
+        <p>
+            The "Book a Flight" page allows users to browse available flights and make bookings for themselves or others. Here's how to book a flight:
+        </p>
+        <ul>
+            <li><b><u>Viewing Flights</u></b>: Browse flights in a table format, showing flight details like origin, destination, and time.</li>
+            <li><b><u>Booking a Flight</u></b>: Click the "Book" button next to your chosen flight. A form will appear, allowing you to enter passenger details (name and passport number) for each traveler.</li>
+            <li><b><u>Submitting the Booking</u></b>: After entering all details, click "Submit Booking" to confirm. A confirmation message will appear, and your booking will be saved.</li>
+        </ul>
 
-        <h3>3. Complete a Booking</h3>
-        <p>Fill out the form with the number of passengers, and input their names and passport IDs. Once completed, click "Submit" to save the booking.</p>
+        <h2>4. User - Manage Bookings</h2>
+        <p>
+            The "Manage Bookings" page lets users view all their confirmed bookings. Here's what you can do:
+        </p>
+        <ul>
+            <li><b><u>Viewing Bookings</u></b>: All bookings are listed in a table, showing details like flight number, date, time, origin, destination, number of passengers, and passenger details.</li>
+            <li><b><u>Dynamic Updates</u></b>: Any new bookings you make will appear in this table without needing a page refresh.</li>
+        </ul>
+    </section>
+  
+</body>
+</html>
 
-        <h3>4. Manage Bookings</h3>
-        <p>Visit the Booking Management page to see a list of all saved bookings, including flight details, passenger count, and a destination image.</p>
-
-        <h2>Technical Aspects</h2>
-
-        <h3>1. Local Storage</h3>
-        <p>We use <code>localStorage</code> to save flight and booking data, ensuring it persists across sessions. Example:</p>
-        <pre><code>
-const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-bookings.push({
-    flight: selectedFlight,
-    passengers: passengerDetails
-});
-localStorage.setItem("bookings", JSON.stringify(bookings));
-        </code></pre>
-
-        <h3>2. Dynamic Content Rendering</h3>
-        <p>Flights and bookings are displayed dynamically using JavaScript. Example:</p>
-        <pre><code>
-function renderFlights(flights) {
-    const tableBody = document.getElementById("flightTable").getElementsByTagName("tbody")[0];
-    tableBody.innerHTML = "";
-    flights.forEach(flight => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${flight.flightNo}</td>
-            <td>${flight.origin}</td>
-            <td>${flight.destination}</td>
-            <td>${flight.boardingDate}</td>
-            <td>${flight.boardingTime}</td>
-            <td>${flight.arrivalDate}</td>
-            <td>${flight.arrivalTime}</td>
-            <td>${flight.numberOfSeats}</td>
-            <td><button>Book</button></td>
-        `;
-        tableBody.appendChild(row);
-    });
-}
-        </code></pre>
-
-        <h3>3. Dynamic Forms</h3>
-        <p>Passenger forms dynamically generate input fields based on the number of passengers entered. Example:</p>
-        <pre><code>
-function generatePassengerFields() {
-    const numPassengers = parseInt(document.getElementById("numPassengers").value, 10);
-    const passengerFieldsDiv = document.getElementById("passengerFields");
-    passengerFieldsDiv.innerHTML = "";
-    for (let i = 1; i <= numPassengers; i++) {
-        passengerFieldsDiv.innerHTML += `
-            <label>Passenger ${i} Name:</label>
-            <input type="text" required>
-            <label>Passenger ${i} Passport ID:</label>
-            <input type="text" required>
-        `;
-    }
-}
-        </code></pre>
-
-        <h3>4. Filtering</h3>
-        <p>Flights can be filtered by origin and destination using JavaScript’s <code>filter()</code> method. Example:</p>
-        <pre><code>
-function applyFilters() {
-    const originFilter = document.getElementById("filterOrigin").value.trim().toLowerCase();
-    const destinationFilter = document.getElementById("filterDestination").value.trim().toLowerCase();
-
-    const filteredFlights = flights.filter(flight => {
-        return (!originFilter || flight.origin.toLowerCase().includes(originFilter)) &&
-               (!destinationFilter || flight.destination.toLowerCase().includes(destinationFilter));
-    });
-
-    renderFlights(filteredFlights);
-}
-        </code></pre>
-
-        <footer>
-            <a href="index.html">Return to Home</a>
-        </footer>
-    </div>
+    <footer>
+        <p>Return to homepage <a href="index.html">Homepage</a>.</p>
+    </footer>
 </body>
 </html>
