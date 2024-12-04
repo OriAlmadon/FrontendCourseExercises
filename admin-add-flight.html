@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Flight - Ono Air</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: calc(100% - 20px);
+            margin-top: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Flight</h1>
+    <form id="flightForm">
+        <label for="flightNo">Flight No.</label>
+        <input type="text" id="flightNo" placeholder="Flight Number" required>
+        <label for="origin">Origin</label>
+        <select id="origin" required>
+            <option value="">Select Origin</option>
+        </select>
+        <label for="destination">Destination</label>
+        <select id="destination" required>
+            <option value="">Select Destination</option>
+        </select>
+        <label for="boardingDate">Boarding Date</label>
+        <input type="date" id="boardingDate" required>
+        <label for="boardingTime">Boarding Time</label>
+        <input type="time" id="boardingTime" required>
+        <label for="arrivalDate">Arrival Date</label>
+        <input type="date" id="arrivalDate" required>
+        <label for="arrivalTime">Arrival Time</label>
+        <input type="time" id="arrivalTime" required>
+        <label for="numSeats">No. of Seats</label>
+        <input type="number" id="numSeats" min="1" required>
+        <button type="submit">Add Flight</button>
+    </form>
+    <script src="data/destinations.js"></script>
+    <script src="data/flights.js"></script>
+    <script>
+        const flightForm = document.getElementById('flightForm');
+        const originSelect = document.getElementById('origin');
+        const destinationSelect = document.getElementById('destination');
+
+        // Populate origin and destination dropdowns
+        destinations.forEach(destination => {
+            const option = document.createElement('option');
+            option.value = destination.name;
+            option.textContent = destination.name;
+            originSelect.appendChild(option.cloneNode(true));
+            destinationSelect.appendChild(option);
+        });
+
+        // Handle form submission
+        flightForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const flight = {
+                flightNo: document.getElementById('flightNo').value.trim(),
+                origin: originSelect.value,
+                destination: destinationSelect.value,
+                boardingDate: document.getElementById('boardingDate').value,
+                boardingTime: document.getElementById('boardingTime').value,
+                arrivalDate: document.getElementById('arrivalDate').value,
+                arrivalTime: document.getElementById('arrivalTime').value,
+                numSeats: parseInt(document.getElementById('numSeats').value, 10),
+            };
+
+            const errors = validateFlight(flight);
+
+            if (errors.length > 0) {
+                alert('Please fix the following errors:\n\n' + errors.join('\n'));
+                return;
+            }
+
+            flights.push(flight);
+            saveFlights();
+            alert('Flight added successfully!');
+            flightForm.reset();
+            window.location.href = 'admin-manage-flights.html';
+        });
+    </script>
+</body>
+</html>
