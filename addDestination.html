@@ -56,33 +56,9 @@
         <button type="submit">Add Destination</button>
     </form>
 
-    <script>
-        document.getElementById("addDestinationForm").onsubmit = function (event) {
-            event.preventDefault();
+    <!-- Link to the external JavaScript file -->
+    <script src="data/addDestination.js" type="module"></script>
 
-            // Create a new destination object
-            const newDestination = {
-                destinationCode: document.getElementById("destinationCode").value,
-                destinationName: document.getElementById("destinationName").value,
-                airportName: document.getElementById("airportName").value,
-                airportUrl: document.getElementById("airportUrl").value,
-                imageUrl: document.getElementById("imageUrl").value,
-            };
-
-            // Fetch existing destinations from localStorage or initialize an empty array
-            const destinations = JSON.parse(localStorage.getItem("destinations")) || [];
-
-            // Add the new destination to the array
-            destinations.push(newDestination);
-
-            // Save the updated destinations back to localStorage
-            localStorage.setItem("destinations", JSON.stringify(destinations));
-
-            // Redirect back to the destination management page
-            alert("Destination added successfully!");
-            window.location.href = "index.html";
-        };
-    </script>
     <footer style="position: fixed; bottom: 0; width: 100%; background-color: #007BFF; color: white; text-align: center; padding: 10px;">
         <a href="help.html" style="color: white; text-decoration: none; font-size: 18px;">
             <img src="help-icon.png" alt="Help Icon" style="width: 24px; height: 24px; vertical-align: middle;"> 
