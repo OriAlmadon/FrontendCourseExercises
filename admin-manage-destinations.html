@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Destinations - Ono Air</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: calc(100% - 20px);
+            margin-top: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .back-link {
+            text-align: center;
+            margin: 20px;
+        }
+        .back-link a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        #destinationList {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #destinationList h2 {
+            margin-bottom: 10px;
+        }
+        #destinationList ul {
+            list-style: none;
+            padding: 0;
+        }
+        #destinationList ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<header style="background-color: #f4f4f9; padding: 20px; border-bottom: 2px solid #ccc;">
+    <h1 style="margin: 0; font-size: 2.5rem; text-align: left; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333;">
+        <a href="index.html" style="text-decoration: none; color: #333;">
+            Ono Air
+        </a>
+    </h1>
+</header>
+
+<body>
+    <h1>Manage Destinations</h1>
+    <form id="destinationForm">
+        <label for="destinationName">Destination Name</label>
+        <input type="text" id="destinationName" placeholder="Destination Name" required>
+
+        <label for="imageUrl">Image URL</label>
+        <input type="url" id="imageUrl" placeholder="Image URL" required>
+
+        <label for="airportName">Airport Name</label>
+        <input type="text" id="airportName" placeholder="Airport Name" required>
+
+        <label for="airportWebsite">Airport Website</label>
+        <input type="url" id="airportWebsite" placeholder="Airport Website" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Email Address" required>
+
+        <label for="destinationCode">Destination Code (3 uppercase letters)</label>
+        <input type="text" id="destinationCode" placeholder="e.g., JFK" pattern="[A-Z]{3}" required>
+
+        <button type="submit">Add Destination</button>
+    </form>
+    <div class="back-link">
+        <a href="index.html">Back to Home</a>
+    </div>
+    <div id="destinationList">
+        <h2>Existing Destinations</h2>
+        <ul id="destinations"></ul>
+    </div>
+
+    <script src="data/destinations.js"></script>
+</body>
+<footer>
+    <p>
+        Need help? Visit our 
+        <a href="help.html" style="color: #3498db; text-decoration: none;">Help Page</a>.
+    </p>
+</footer>
+</html>
