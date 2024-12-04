@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Flight - Ono Air</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        #flightTable {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        #flightTable th, #flightTable td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        #flightTable th {
+            background-color: #3498db;
+            color: white;
+        }
+        #flightTable tbody tr:nth-child(even) {
+            background-color: #f4f4f9;
+        }
+        #flightTable tbody tr:hover {
+            background-color: #d9e4f5;
+        }
+        .book-button {
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .book-button:hover {
+            background-color: #2980b9;
+        }
+        #bookingForm {
+            display: none;
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: calc(100% - 20px);
+            margin-top: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book a Flight</h1>
+    <table id="flightTable">
+        <thead>
+            <tr>
+                <th>Flight No.</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Boarding Date</th>
+                <th>Boarding Time</th>
+                <th>Arrival Date</th>
+                <th>Arrival Time</th>
+                <th>No. of Seats</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically populated here -->
+        </tbody>
+    </table>
+
+    <form id="bookingForm">
+        <h2>New Booking</h2>
+        <p id="selectedFlightDetails"></p>
+        <label for="passengerCount">Number of Passengers</label>
+        <input type="number" id="passengerCount" min="1" required>
+
+        <div id="passengerDetails"></div>
+
+        <button type="submit">Submit Booking</button>
+    </form>
+
+    <script src="data/flights.js"></script>
+    <script src="data/bookings.js"></script>
+    <script>
+        const flightTableBody = document.querySelector('#flightTable tbody');
+        const bookingForm = document.getElementById('bookingForm');
+        const passengerDetailsDiv = document.getElementById('passengerDetails');
+        const selectedFlightDetails = document.getElementById('selectedFlightDetails');
+        let selectedFlight = null;
+
+        // Render flights table
+        function renderFlightsTable() {
+            flightTableBody.innerHTML = ''; // Clear existing rows
+            flights.forEach(flight => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${flight.flightNo}</td>
+                    <td>${flight.origin}</td>
+                    <td>${flight.destination}</td>
+                    <td>${flight.boardingDate}</td>
+                    <td>${flight.boardingTime}</td>
+                    <td>${flight.arrivalDate}</td>
+                    <td>${flight.arrivalTime}</td>
+                    <td>${flight.numSeats}</td>
+                    <td><button class="book-button" data-flight-no="${flight.flightNo}">Book</button></td>
+                `;
+                flightTableBody.appendChild(row);
+            });
+
+            document.querySelectorAll('.book-button').forEach(button => {
+                button.addEventListener('click', event => {
+                    const flightNo = event.target.getAttribute('data-flight-no');
+                    selectedFlight = flights.find(flight => flight.flightNo === flightNo);
+                    selectedFlightDetails.textContent = `Booking for Flight ${selectedFlight.flightNo}: ${selectedFlight.origin} to ${selectedFlight.destination}`;
+                    bookingForm.style.display = 'block';
+                    passengerDetailsDiv.innerHTML = ''; // Clear dynamic inputs
+                });
+            });
+        }
+
+        // Generate passenger details dynamically
+        document.getElementById('passengerCount').addEventListener('input', event => {
+            const count = parseInt(event.target.value, 10);
+            passengerDetailsDiv.innerHTML = ''; // Clear existing inputs
+
+            for (let i = 1; i <= count; i++) {
+                const nameField = `<label for="passengerName${i}">Passenger ${i} Name</label>
+                                   <input type="text" id="passengerName${i}" required>`;
+                const passportField = `<label for="passportNumber${i}">Passenger ${i} Passport Number</label>
+                                       <input type="text" id="passportNumber${i}" required>`;
+                passengerDetailsDiv.innerHTML += nameField + passportField;
+            }
+        });
+
+        // Handle booking form submission
+        bookingForm.addEventListener('submit', event => {
+            event.preventDefault();
+
+            const passengerCount = parseInt(document.getElementById('passengerCount').value, 10);
+            const passengerDetails = [];
+            for (let i = 1; i <= passengerCount; i++) {
+                passengerDetails.push({
+                    name: document.getElementById(`passengerName${i}`).value,
+                    passport: document.getElementById(`passportNumber${i}`).value
+                });
+            }
+
+            const booking = {
+                flightNo: selectedFlight.flightNo,
+                passengerCount,
+                passengerDetails
+            };
+
+            if (addBooking(booking, selectedFlight)) {
+                bookingForm.reset();
+                bookingForm.style.display = 'none';
+                window.location.href = 'user-manage-bookings.html';
+            }
+        });
+
+        renderFlightsTable();
+    </script>
+</body>
+</html>
