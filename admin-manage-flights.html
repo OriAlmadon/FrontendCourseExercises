@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Flights - Ono Air</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        #flightTable {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        #flightTable th, #flightTable td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        #flightTable th {
+            background-color: #3498db;
+            color: white;
+        }
+        #flightTable tbody tr:nth-child(even) {
+            background-color: #f4f4f9;
+        }
+        #flightTable tbody tr:hover {
+            background-color: #d9e4f5;
+        }
+        .add-flight-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .add-flight-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<header style="background-color: #f4f4f9; padding: 20px; border-bottom: 2px solid #ccc;">
+    <h1 style="margin: 0; font-size: 2.5rem; text-align: left; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333;">
+        <a href="index.html" style="text-decoration: none; color: #333;">
+            Ono Air
+        </a>
+    </h1>
+</header>
+
+<body>
+    <h1>Manage Flights</h1>
+    <table id="flightTable">
+        <thead>
+            <tr>
+                <th>Flight No.</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Boarding Date</th>
+                <th>Boarding Time</th>
+                <th>Arrival Date</th>
+                <th>Arrival Time</th>
+                <th>No. of Seats</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically populated here -->
+        </tbody>
+    </table>
+    <a href="admin-add-flight.html" class="add-flight-button">Add Flight</a>
+    <script src="data/flights.js"></script>
+    <script>
+        const flightTableBody = document.querySelector('#flightTable tbody');
+
+        // Function to render the flights table
+        function renderFlightsTable() {
+            flightTableBody.innerHTML = ''; // Clear existing rows
+            flights.forEach((flight) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${flight.flightNo}</td>
+                    <td>${flight.origin}</td>
+                    <td>${flight.destination}</td>
+                    <td>${flight.boardingDate}</td>
+                    <td>${flight.boardingTime}</td>
+                    <td>${flight.arrivalDate}</td>
+                    <td>${flight.arrivalTime}</td>
+                    <td>${flight.numSeats}</td>
+                `;
+                flightTableBody.appendChild(row);
+            });
+        }
+
+        // Initial rendering of the flights table
+        renderFlightsTable();
+
+        // Listen for storage changes to update the table
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'flights') {
+                const updatedFlights = JSON.parse(localStorage.getItem('flights'));
+                flights.length = 0; // Clear the original array
+                flights.push(...updatedFlights); // Add the updated flights
+                renderFlightsTable();
+            }
+        });
+    </script>
+</body>
+<footer>
+    <p>
+        Need help? Visit our 
+        <a href="help.html" style="color: #3498db; text-decoration: none;">Help Page</a>.
+    </p>
+</footer>
+</html>
