@@ -23,64 +23,6 @@ const bookings = JSON.parse(localStorage.getItem('bookings')) || [
             { name: "Charlie Green", passport: "E12345987" },
             { name: "Diana White", passport: "F87654321" }
         ]
-    },
-    {
-        flightNo: "TLV808",
-        passengerCount: 2,
-        passengerDetails: [
-            { name: "David Ben-Gurion", passport: "IL19230123" },
-            { name: "Golda Meir", passport: "IL19080322" }
-        ]
-    },
-    {
-        flightNo: "TLV909",
-        passengerCount: 3,
-        passengerDetails: [
-            { name: "Theodor Herzl", passport: "IL18600213" },
-            { name: "Menachem Begin", passport: "IL19130816" },
-            { name: "Yitzhak Rabin", passport: "IL19220301" }
-        ]
-    },
-    {
-        flightNo: "TLV010",
-        passengerCount: 1,
-        passengerDetails: [
-            { name: "Chaim Weizmann", passport: "IL18740227" }
-        ]
-    },
-    {
-        flightNo: "TLV111",
-        passengerCount: 4,
-        passengerDetails: [
-            { name: "Moshe Dayan", passport: "IL19150520" },
-            { name: "Leah Goldberg", passport: "IL19110529" },
-            { name: "Yigal Allon", passport: "IL19181010" },
-            { name: "Haim Nachman Bialik", passport: "IL18730109" }
-        ]
-    },
-    {
-        flightNo: "TLV212",
-        passengerCount: 2,
-        passengerDetails: [
-            { name: "Golda Meir", passport: "IL19080405" },
-            { name: "Abba Eban", passport: "IL19150515" }
-        ]
-    },
-    {
-        flightNo: "TLV313",
-        passengerCount: 3,
-        passengerDetails: [
-            { name: "Yehuda Amichai", passport: "IL19240503" },
-            { name: "Rachel Bluwstein", passport: "IL18900206" },
-            { name: "Zalman Shazar", passport: "IL18890124" }
-        ]
-    },
-    {
-        flightNo: "TLV414",
-        passengerCount: 1,
-        passengerDetails: [
-            { name: "Shimon Peres", passport: "IL19230802" }
-        ]
     }
     
 ];

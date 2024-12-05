@@ -19,7 +19,88 @@ const flights = JSON.parse(localStorage.getItem('flights')) || [
         arrivalDate: "2024-12-12",
         arrivalTime: "11:00",
         numSeats: 180
+    } , 
+    {
+        flightNo: "TLV456",
+        origin: "Tel Aviv",
+        destination: "Berlin",
+        boardingDate: "2024-12-15",
+        boardingTime: "12:00",
+        arrivalDate: "2024-12-15",
+        arrivalTime: "16:00",
+        numSeats: 150
+    },
+    {
+        flightNo: "BER321",
+        origin: "Berlin",
+        destination: "New York",
+        boardingDate: "2024-12-18",
+        boardingTime: "08:00",
+        arrivalDate: "2024-12-18",
+        arrivalTime: "16:00",
+        numSeats: 220
+    },
+    {
+        flightNo: "JFK999",
+        origin: "New York",
+        destination: "Dubai",
+        boardingDate: "2024-12-20",
+        boardingTime: "22:30",
+        arrivalDate: "2024-12-21",
+        arrivalTime: "06:45",
+        numSeats: 180
+    },
+    {
+        flightNo: "DXB888",
+        origin: "Dubai",
+        destination: "Singapore",
+        boardingDate: "2024-12-22",
+        boardingTime: "14:00",
+        arrivalDate: "2024-12-22",
+        arrivalTime: "22:30",
+        numSeats: 250
+    },
+    {
+        flightNo: "SIN777",
+        origin: "Singapore",
+        destination: "Tokyo",
+        boardingDate: "2024-12-25",
+        boardingTime: "10:15",
+        arrivalDate: "2024-12-25",
+        arrivalTime: "16:30",
+        numSeats: 200
+    },
+    {
+        flightNo: "NRT333",
+        origin: "Tokyo",
+        destination: "Los Angeles",
+        boardingDate: "2024-12-28",
+        boardingTime: "17:00",
+        arrivalDate: "2024-12-28",
+        arrivalTime: "08:00",
+        numSeats: 300
+    },
+    {
+        flightNo: "LAX222",
+        origin: "Los Angeles",
+        destination: "Sydney",
+        boardingDate: "2024-12-30",
+        boardingTime: "20:00",
+        arrivalDate: "2024-12-31",
+        arrivalTime: "10:30",
+        numSeats: 280
+    },
+    {
+        flightNo: "SYD555",
+        origin: "Sydney",
+        destination: "Tel Aviv",
+        boardingDate: "2025-01-02",
+        boardingTime: "13:00",
+        arrivalDate: "2025-01-03",
+        arrivalTime: "06:00",
+        numSeats: 240
     }
+    
 ];
 
 // Save flights to local storage
