@@ -23,7 +23,8 @@ const bookings = JSON.parse(localStorage.getItem('bookings')) || [
             { name: "Charlie Green", passport: "E12345987" },
             { name: "Diana White", passport: "F87654321" }
         ]
-    }
+    },
+    
     
 ];
 
