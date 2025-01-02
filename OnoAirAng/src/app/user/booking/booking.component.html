@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div *ngIf="flight; else notFound">
+  <h1>Book Flight {{ flight.flightNumber }}</h1>
+  <p><strong>Departure:</strong> {{ flight.departure.name }}</p>
+  <p><strong>Arrival:</strong> {{ flight.arrival.name }}</p>
+  <p><strong>Departure Time:</strong> {{ flight.departureDateTime | date: 'short' }}</p>
+
+  <form (ngSubmit)="bookFlight()">
+    <div *ngFor="let passenger of passengers; let i = index">
+      <h3>Passenger {{ i + 1 }}</h3>
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="passenger.name" name="name-{{ i }}" required />
+      <label>Passport Number:</label>
+      <input type="text" [(ngModel)]="passenger.passportNumber" name="passport-{{ i }}" required />
+    </div>
+    <button type="button" (click)="addPassenger()">Add Passenger</button>
+    <button type="submit">Submit Booking</button>
+  </form>
+</div>
+
+<ng-template #notFound>
+  <p>Flight not found!</p>
+</ng-template>

@@ -1,0 +1,72 @@
+<div class="flight-management">
+  <app-header></app-header>
+
+  <h1>Manage Flights</h1>
+
+  <div class="flight-table-container mat-elevation-z8">
+    <table mat-table [dataSource]="flights" class="custom-table">
+      <!-- Flight Number Column -->
+      <ng-container matColumnDef="flightNumber">
+        <th mat-header-cell *matHeaderCellDef> Flight No. </th>
+        <td mat-cell *matCellDef="let flight"> {{ flight.flightNumber }} </td>
+      </ng-container>
+
+      <!-- Departure Column -->
+      <ng-container matColumnDef="departure">
+        <th mat-header-cell *matHeaderCellDef> Departure </th>
+        <td mat-cell *matCellDef="let flight"> 
+          {{ flight.departure.name }} ({{ flight.departure.code }}) 
+          <br>
+          {{ flight.departure.airportName }}
+        </td>
+      </ng-container>
+
+      <!-- Arrival Column -->
+      <ng-container matColumnDef="arrival">
+        <th mat-header-cell *matHeaderCellDef> Arrival </th>
+        <td mat-cell *matCellDef="let flight"> 
+          {{ flight.arrival.name }} ({{ flight.arrival.code }}) 
+          <br>
+          {{ flight.arrival.airportName }}
+        </td>
+      </ng-container>
+
+      <!-- Departure Time Column -->
+      <ng-container matColumnDef="departureTime">
+        <th mat-header-cell *matHeaderCellDef> Departure Time </th>
+        <td mat-cell *matCellDef="let flight"> 
+          {{ flight.departureDateTime | date: 'short' }}
+        </td>
+      </ng-container>
+
+      <!-- Arrival Time Column -->
+      <ng-container matColumnDef="arrivalTime">
+        <th mat-header-cell *matHeaderCellDef> Arrival Time </th>
+        <td mat-cell *matCellDef="let flight"> 
+          {{ flight.arrivalDateTime | date: 'short' }}
+        </td>
+      </ng-container>
+
+      <!-- Seats Column -->
+      <ng-container matColumnDef="seats">
+        <th mat-header-cell *matHeaderCellDef> Seats </th>
+        <td mat-cell *matCellDef="let flight"> 
+          {{ flight.seats }}
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let flight">
+          <button mat-raised-button color="primary" (click)="goToFlightDetails(flight.flightNumber)">
+            View Details
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

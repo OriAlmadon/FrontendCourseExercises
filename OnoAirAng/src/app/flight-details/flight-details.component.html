@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<div *ngIf="flight; else notFound">
+  <h1>Flight Details: {{ flight.flightNumber }}</h1>
+
+  <p><strong>Departure:</strong> {{ flight.departure.name }} ({{ flight.departure.code }})</p>
+  <p><strong>Arrival:</strong> {{ flight.arrival.name }} ({{ flight.arrival.code }})</p>
+  <p><strong>Departure Time:</strong> {{ flight.departureDateTime | date: 'short' }}</p>
+  <p><strong>Arrival Time:</strong> {{ flight.arrivalDateTime | date: 'short' }}</p>
+  <p><strong>Seats Available:</strong> {{ flight.seats }}</p>
+
+  <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
+</div>
+
+<ng-template #notFound>
+  <p>Flight details not available.</p>
+</ng-template>

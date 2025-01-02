@@ -1,0 +1,16 @@
+<div *ngIf="destination; else notFound">
+  <h1>{{ destination.name }}</h1>
+  <img [src]="destination.imageUrl" alt="{{ destination.name }}">
+  <p><strong>Airport:</strong> {{ destination.airportName }}</p>
+  <p>
+    <strong>Website:</strong>
+    <a [href]="destination.website" target="_blank">{{ destination.website }}</a>
+  </p>
+  <p><strong>Email:</strong> {{ destination.email }}</p>
+  <button mat-raised-button (click)="goBack()">Back</button>
+</div>
+
+<ng-template #notFound>
+  <p>Destination not found.</p>
+  <button mat-raised-button (click)="goBack()">Back</button>
+</ng-template>
