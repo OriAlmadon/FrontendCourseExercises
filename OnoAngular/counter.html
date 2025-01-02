@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .counter {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button.reset {
+            background-color: #FF4C4C;
+        }
+
+        button.reset:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Counter App</h1>
+    <div class="counter" id="counter">0</div>
+    <div class="buttons">
+        <button id="increment">Increment</button>
+        <button id="decrement">Decrement</button>
+        <button class="reset" id="reset">Reset</button>
+    </div>
+
+    <script>
+        // Get elements
+        const counterDisplay = document.getElementById('counter');
+        const incrementButton = document.getElementById('increment');
+        const decrementButton = document.getElementById('decrement');
+        const resetButton = document.getElementById('reset');
+
+        // Initialize counter value
+        let counterValue = 0;
+
+        // Functions to update counter
+        function updateCounter() {
+            counterDisplay.textContent = counterValue;
+        }
+
+        // Increment counter
+        incrementButton.addEventListener('click', () => {
+            counterValue++;
+            updateCounter();
+        });
+
+        // Decrement counter
+        decrementButton.addEventListener('click', () => {
+            counterValue--;
+            updateCounter();
+        });
+
+        // Reset counter
+        resetButton.addEventListener('click', () => {
+            counterValue = 0;
+            updateCounter();
+        });
+    </script>
+</body>
+</html>
