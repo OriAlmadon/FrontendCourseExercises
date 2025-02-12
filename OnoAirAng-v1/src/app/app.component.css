@@ -1,0 +1,5 @@
+/* Ensure main content area grows to push footer down */
+.main-content {
+    flex: 1;
+    padding-bottom: 152px; /* Ensures content does not overlap with the footer */
+}

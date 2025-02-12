@@ -1,0 +1,65 @@
+<div class="destination-management">
+  <div class="container">
+    <mat-card *ngIf="flight; else notFound" class="flight-card">
+      <mat-card-header class="header">
+        <mat-card-title class="title">Flight Details</mat-card-title>
+        <mat-card-subtitle class="subtitle">Flight No: {{ flight.flightNumber }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content class="content">
+        <div class="details">
+          <div class="info">
+            <mat-icon class="icon">flight_takeoff</mat-icon>
+            <span>
+              <strong>Departure:</strong> {{ flight.departure.name }} ({{ flight.departure.code }})
+              <br>
+              <small>{{ flight.departure.airportName }}</small>
+            </span>
+          </div>
+
+          <div class="info">
+            <mat-icon class="icon">flight_land</mat-icon>
+            <span>
+              <strong>Arrival:</strong> {{ flight.arrival.name }} ({{ flight.arrival.code }})
+              <br>
+              <small>{{ flight.arrival.airportName }}</small>
+            </span>
+          </div>
+
+          <div class="info">
+            <mat-icon class="icon">schedule</mat-icon>
+            <span>
+              <strong>Departure Time:</strong> {{ flight.departureDateTime | date: 'short' }}
+            </span>
+          </div>
+
+          <div class="info">
+            <mat-icon class="icon">event</mat-icon>
+            <span>
+              <strong>Arrival Time:</strong> {{ flight.arrivalDateTime | date: 'short' }}
+            </span>
+          </div>
+
+          <div class="info">
+            <mat-icon class="icon">airline_seat_recline_normal</mat-icon>
+            <span>
+              <strong>Seats Available:</strong> {{ flight.seats }}
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" class="back-btn" (click)="goBack()">Go Back</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <ng-template #notFound>
+      <mat-card class="not-found">
+        <mat-card-content>
+          <p>Flight details not available.</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-template>
+  </div>
+</div>

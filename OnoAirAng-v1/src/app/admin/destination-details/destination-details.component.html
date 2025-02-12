@@ -1,0 +1,53 @@
+<div class="destination-management">
+  <div class="destination-container">
+    <mat-card *ngIf="destination; else notFound" class="destination-card">
+      <mat-card-header>
+        <mat-card-title>{{ destination.name }}</mat-card-title>
+        <mat-card-subtitle>{{ destination.airportName }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <img mat-card-image class="destination-image" [src]="destination.imageUrl" alt="{{ destination.name }}">
+
+      <mat-card-content>
+        <div class="details">
+          <div class="info">
+            <mat-icon class="icon">language</mat-icon>
+            <span>
+              <strong>Website:</strong>
+              <a [href]="destination.website" target="_blank">{{ destination.website }}</a>
+            </span>
+          </div>
+
+          <div class="info">
+            <mat-icon class="icon">email</mat-icon>
+            <span>
+              <strong>Email:</strong> {{ destination.email }}
+            </span>
+          </div>
+
+          <div class="info">
+            <mat-icon class="icon">flag</mat-icon>
+            <span>
+              <strong>Country:</strong> {{ destination.country }}
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <ng-template #notFound>
+      <mat-card class="not-found">
+        <mat-card-content>
+          <p>Destination not found.</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="destination-management">
+
+  <h1>Manage Destinations</h1>
+
+  <div class="destination-table-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="custom-table" matSort>
+
+      <!-- Destination Code Column -->
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+        <td mat-cell *matCellDef="let destination"> {{ destination.code }} </td>
+      </ng-container>
+
+      <!-- Destination Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let destination"> {{ destination.name }} </td>
+      </ng-container>
+
+      <!-- Airport Name Column -->
+      <ng-container matColumnDef="airportName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Airport </th>
+        <td mat-cell *matCellDef="let destination"> {{ destination.airportName }} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let destination">
+          <button mat-raised-button color="primary" (click)="goToDestinationDetails(destination.code)">View Details</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Pagination -->
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

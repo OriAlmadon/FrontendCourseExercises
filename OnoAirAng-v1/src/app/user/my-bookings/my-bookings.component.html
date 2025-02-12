@@ -1,0 +1,97 @@
+<div class="my-bookings">
+  <h1>My Bookings</h1>
+
+  <!-- Future Bookings Section -->
+  <div class="bookings-section" *ngIf="futureBookings.length > 0; else noFutureBookings">
+    <h2>Upcoming Bookings</h2>
+    <table mat-table [dataSource]="futureBookingsDataSource" matSort class="custom-table">
+      <ng-container matColumnDef="flightNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Flight No.</th>
+        <td mat-cell *matCellDef="let booking">
+          <a [routerLink]="['/booking-details', booking.flight.flightNumber]" class="booking-link">
+            {{ booking.flight.flightNumber }}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="departure">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Departure</th>
+        <td mat-cell *matCellDef="let booking">{{ booking.flight.departure.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="arrival">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Arrival</th>
+        <td mat-cell *matCellDef="let booking">{{ booking.flight.arrival.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="departureTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Departure Time</th>
+        <td mat-cell *matCellDef="let booking">{{ booking.flight.departureDateTime | date: 'short' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="passengers">
+        <th mat-header-cell *matHeaderCellDef>Passengers</th>
+        <td mat-cell *matCellDef="let booking">
+          <ul>
+            <li *ngFor="let passenger of booking.passengers">
+              {{ passenger.name }} ({{ passenger.passportNumber }})
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #futurePaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <ng-template #noFutureBookings>
+    <p class="no-bookings-message">No upcoming bookings found.</p>
+  </ng-template>
+
+  <!-- Past Bookings Section -->
+  <div class="bookings-section" *ngIf="pastBookings.length > 0">
+    <h2>Past Bookings</h2>
+    <table mat-table [dataSource]="pastBookingsDataSource" matSort class="custom-table">
+      <ng-container matColumnDef="flightNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Flight No.</th>
+        <td mat-cell *matCellDef="let booking">
+          <a [routerLink]="['/booking-details', booking.flight.flightNumber]" class="booking-link">
+            {{ booking.flight.flightNumber }}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="departure">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Departure</th>
+        <td mat-cell *matCellDef="let booking">{{ booking.flight.departure.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="arrival">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Arrival</th>
+        <td mat-cell *matCellDef="let booking">{{ booking.flight.arrival.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="departureTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Departure Time</th>
+        <td mat-cell *matCellDef="let booking">{{ booking.flight.departureDateTime | date: 'short' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="passengers">
+        <th mat-header-cell *matHeaderCellDef>Passengers</th>
+        <td mat-cell *matCellDef="let booking">
+          <ul>
+            <li *ngFor="let passenger of booking.passengers">
+              {{ passenger.name }} ({{ passenger.passportNumber }})
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #pastPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

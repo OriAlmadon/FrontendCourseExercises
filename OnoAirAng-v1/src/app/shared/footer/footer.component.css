@@ -1,0 +1,58 @@
+/* Footer Styling */
+.app-footer {
+    background-color: #1976d2;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Footer Content */
+.footer-content {
+    max-width: 900px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.footer-text h3 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #f8c200;
+}
+
+.footer-text p {
+    font-size: 16px;
+    color: #d0d0d0;
+    margin: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .footer-text h3 {
+        font-size: 24px;
+    }
+    .footer-text p {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,42 @@
+<div *ngIf="flight; else notFound" class="booking-container">
+  <div class="booking-card">
+    <h1>Book Flight {{ flight.flightNumber }}</h1>
+    
+    <div class="flight-details">
+      <p><strong>Departure:</strong> {{ flight.departure.name }}</p>
+      <p><strong>Arrival:</strong> {{ flight.arrival.name }}</p>
+      <p><strong>Departure Time:</strong> {{ flight.departureDateTime | date: 'short' }}</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <form #bookingForm="ngForm" (ngSubmit)="bookFlight(bookingForm)" class="booking-form">
+      <h2>Passenger Information</h2>
+
+      <div *ngFor="let passenger of passengers; let i = index" class="passenger-card">
+        <h3>Passenger {{ i + 1 }}</h3>
+        <label>Name:</label>
+        <input type="text" [(ngModel)]="passenger.name" name="name-{{ i }}" required placeholder="Enter full name" #nameInput="ngModel" />
+        <div *ngIf="nameInput.invalid && nameInput.touched" class="error-text">Name is required</div>
+
+        <label>Passport Number:</label>
+        <input type="text" [(ngModel)]="passenger.passportNumber" name="passport-{{ i }}" required placeholder="Enter passport number" #passportInput="ngModel" />
+        <div *ngIf="passportInput.invalid && passportInput.touched" class="error-text">Passport number is required</div>
+      </div>
+
+      <div class="booking-actions">
+        <button type="button" class="add-passenger" (click)="addPassenger()">+ Add Passenger</button>
+        <button type="submit" class="submit-booking" [disabled]="bookingForm.invalid">Submit Booking</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <p>Flight not found!</p>
+  </div>
+</ng-template>

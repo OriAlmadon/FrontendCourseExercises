@@ -1,0 +1,153 @@
+/* Container Styling */
+.booking-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 65vh;
+  background-color: #f0f4f8;
+  padding: 20px;
+}
+
+/* Booking Card */
+.booking-card {
+  max-width: 600px;
+  width: 100%;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Headings */
+h1,
+h2,
+h3 {
+  color: #1976d2;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Flight Details */
+.flight-details {
+  background: #e3f2fd;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* Passenger Card */
+.passenger-card {
+  background: #fafafa;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #1976d2;
+  border-radius: 8px;
+  text-align: left;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Input Fields */
+input {
+  width: 90%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+input:focus {
+  border-color: #1976d2;
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(25, 118, 210, 0.3);
+}
+
+/* Buttons */
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.add-passenger {
+  background-color: #fbc02d;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.add-passenger:hover {
+  background-color: #f9a825;
+}
+
+.submit-booking {
+  background-color: #1976d2;
+  color: white;
+}
+
+.submit-booking:hover {
+  background-color: #0d47a1;
+}
+
+.submit-booking:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+  background: #ffdddd;
+  color: #d8000c;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.snackbar-success {
+  background-color: #4caf50;
+  /* Green */
+  color: white;
+}
+
+.snackbar-error {
+  background-color: #f44336;
+  /* Red */
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .booking-card {
+    padding: 20px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
