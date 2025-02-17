@@ -91,3 +91,30 @@ span.canceled {
     color: white;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
+
+.status-on-time {
+    color: #fff;
+    font-weight: bold;
+    background-color: green;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 14px;
+}
+
+.status-delayed {
+    color: #fff;
+    font-weight: bold;
+    background-color: orange;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 14px;
+}
+
+.status-cancelled {
+    color: #fff;
+    font-weight: bold;
+    background-color: red;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 14px;
+}

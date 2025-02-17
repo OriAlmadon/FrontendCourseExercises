@@ -9,7 +9,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FlightService } from '../../services/flight.service';
 import { Flight } from '../../models/flight';
 
@@ -17,6 +17,7 @@ import { Flight } from '../../models/flight';
   selector: 'app-flight-management',
   standalone: true,
   imports: [
+    CommonModule,
     MatTableModule,
     MatButtonModule,
     MatPaginatorModule,
@@ -37,6 +38,7 @@ export class FlightManagementComponent implements OnInit, AfterViewInit {
     'departureTime',
     'arrivalTime',
     'seats',
+    'status',
     'actions',
   ];
   dataSource = new MatTableDataSource<Flight>([]);
@@ -44,7 +46,7 @@ export class FlightManagementComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private flightService: FlightService, private router: Router) {}
+  constructor(private flightService: FlightService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -57,14 +59,14 @@ export class FlightManagementComponent implements OnInit, AfterViewInit {
 
     // Ensure sort works even after filter is applied
     this.dataSource.filterPredicate = (data: Flight, filter: string) => {
-      return data.flightNumber.toLowerCase().includes(filter) || 
-             data.departure.name.toLowerCase().includes(filter) || 
-             data.arrival.name.toLowerCase().includes(filter);
+      return data.flightNumber.toLowerCase().includes(filter) ||
+        data.departure.name.toLowerCase().includes(filter) ||
+        data.arrival.name.toLowerCase().includes(filter);
     };
   }
 
   loadFlights(): void {
-    const flights = this.flightService.getAll();
+    const flights = this.flightService.getFlights();
     this.dataSource.data = flights;
   }
 
@@ -80,5 +82,22 @@ export class FlightManagementComponent implements OnInit, AfterViewInit {
 
   goToFlightDetails(flightNumber: string): void {
     this.router.navigate(['/flight-details', flightNumber]);
+  }
+
+  goToFlightStatus(flightNumber: string): void {
+    this.router.navigate(['/admin/flights/flight-status', flightNumber]);
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'On Time':
+        return 'status-on-time';
+      case 'Delayed':
+        return 'status-delayed';
+      case 'Cancelled':
+        return 'status-cancelled';
+      default:
+        return '';
+    }
   }
 }

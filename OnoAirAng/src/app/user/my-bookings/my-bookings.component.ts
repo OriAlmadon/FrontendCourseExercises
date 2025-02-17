@@ -20,7 +20,7 @@ export class MyBookingsComponent implements OnInit, AfterViewInit {
   futureBookings: Booking[] = [];
   pastBookings: Booking[] = [];
 
-  displayedColumns: string[] = ['flightNumber', 'departure', 'arrival', 'departureTime', 'passengers'];
+  displayedColumns: string[] = ['flightNumber', 'departure', 'arrival', 'departureTime', 'passengers', 'status'];
 
   futureBookingsDataSource = new MatTableDataSource<Booking>([]);
   pastBookingsDataSource = new MatTableDataSource<Booking>([]);
@@ -61,6 +61,19 @@ export class MyBookingsComponent implements OnInit, AfterViewInit {
     // Assign to data sources for table
     this.futureBookingsDataSource.data = this.futureBookings;
     this.pastBookingsDataSource.data = this.pastBookings;
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'On Time':
+        return 'status-on-time';
+      case 'Delayed':
+        return 'status-delayed';
+      case 'Cancelled':
+        return 'status-cancelled';
+      default:
+        return '';
+    }
   }
 
 }

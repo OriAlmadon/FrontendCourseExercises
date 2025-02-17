@@ -36,7 +36,7 @@ export class LastMinuteFlightsComponent implements OnInit {
     endOfWeek.setHours(23, 59, 59, 999); // End of the last day of the week
 
     this.flights = this.flightService
-      .getAll()
+      .getFlights()
       .filter(
         (flight: Flight) =>
           flight.departureDateTime >= today &&

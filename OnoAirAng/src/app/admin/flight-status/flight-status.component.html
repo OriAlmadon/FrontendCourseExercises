@@ -1,0 +1,72 @@
+<div class="flight-status-container">
+    <h2 style="margin-bottom: 25px;">Flight Status Management</h2>
+  
+    <div class="flight-details" *ngIf="selectedFlight">        
+        <div class="flight-info">
+          <p><strong>Flight Number:</strong> {{ selectedFlight.flightNumber }}</p>
+          <p><strong>Route:</strong> {{ selectedFlight.departure.name }} → {{ selectedFlight.arrival.name }}</p>
+          <p><strong>Current Status:</strong> 
+            <span style="margin-left: 10px;" [ngClass]="statusClass(selectedFlight.status)">{{ selectedFlight.status }}</span>
+          </p>
+        </div>
+        <div class="schedule-info">
+          <p><strong>Scheduled Departure:</strong> {{ selectedFlight.departureDateTime | date:'MMM d, y h:mm a' }}</p>
+          <p><strong>Scheduled Arrival:</strong> {{ selectedFlight.arrivalDateTime | date:'MMM d, y h:mm a' }}</p>
+          <p><strong>Last Status Update:</strong> {{ selectedFlight.statusLastUpdated | date:'MMM d, y h:mm a' }}</p>
+        </div>
+        <div class="additional-info">
+          <p><strong>Available Seats:</strong> {{ selectedFlight.seats }}</p>
+        </div>
+    </div>
+      
+  
+    <!-- Flight Status Selection -->
+    <mat-form-field appearance="fill">
+      <mat-label>Update Status</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" (selectionChange)="onStatusChange($event.value)" required>
+        <mat-option *ngFor="let status of statusOptions" [value]="status">{{ status }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Delayed: New Schedule Inputs -->
+    <div *ngIf="selectedStatus === 'Delayed'" class="delayed-section">
+      <h3>New Schedule</h3>
+  
+      <!-- Departure Date & Time -->
+      <mat-form-field appearance="fill">
+        <mat-label>New Departure Date</mat-label>
+        <input matInput [matDatepicker]="departureDatePicker" [(ngModel)]="newDepartureDate" (ngModelChange)="validateTimes()" required>
+        <mat-datepicker-toggle matSuffix [for]="departureDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #departureDatePicker></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>New Departure Time</mat-label>
+        <input matInput type="time" [(ngModel)]="newDepartureTime" (ngModelChange)="validateTimes()" required>
+      </mat-form-field>
+  
+      <!-- Arrival Date & Time -->
+      <mat-form-field appearance="fill">
+        <mat-label>New Arrival Date</mat-label>
+        <input matInput [matDatepicker]="arrivalDatePicker" [(ngModel)]="newArrivalDate" (ngModelChange)="validateTimes()" required>
+        <mat-datepicker-toggle matSuffix [for]="arrivalDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #arrivalDatePicker></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>New Arrival Time</mat-label>
+        <input matInput type="time" [(ngModel)]="newArrivalTime" (ngModelChange)="validateTimes()" required>
+      </mat-form-field>
+  
+      <!-- Error Message (If Arrival <= Departure) -->
+      <p class="error-message" *ngIf="isInvalidDateTime">⚠️ Arrival time must be after departure time.</p>
+    </div>
+  
+    <!-- Submit Button with Validation -->
+    <button mat-raised-button color="primary" style="margin-top: 20px;" (click)="updateStatus()" [disabled]="!isFormValid()">Update Status</button>
+
+    <mat-card-actions align="end" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" class="back-btn" (click)="goBack()">Go Back</button>
+    </mat-card-actions>
+</div>
+  

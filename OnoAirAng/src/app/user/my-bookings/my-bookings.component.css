@@ -72,3 +72,24 @@ ul {
   color: #888;
   margin-top: 20px;
 }
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.status-on-time {
+  background-color: green;
+}
+
+.status-delayed {
+  background-color: orange;
+}
+
+.status-cancelled {
+  background-color: red;
+}

@@ -7,7 +7,11 @@ export class Flight {
     public arrival: Destination, // Arrival destination object
     public departureDateTime: Date, // Departure date and time
     public arrivalDateTime: Date, // Arrival date and time
-    public seats: number // Number of seats available
+    public seats: number, // Number of seats available
+    public status: "On Time" | "Delayed" | "Cancelled" = "On Time", // Default: "On Time"
+    public updatedDepartureTime: Date = departureDateTime, // Initially same as scheduled departure
+    public updatedArrivalTime: Date = arrivalDateTime, // Initially same as scheduled arrival
+    public statusLastUpdated: Date = new Date(), // Default to now
   ) {}
 }
 
@@ -23,7 +27,7 @@ export const flights: Flight[] = [
       destinations.find(d => d.code === 'LAX')!, 
       departureDate,
       arrivalDate,
-      Math.floor(Math.random() * 100) + 100 
+      Math.floor(Math.random() * 100) + 100
     );
   }),
 ];

@@ -47,16 +47,63 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
-button {
-  margin-top: 20px;
+.book-btn {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #1976d2;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #45a049;
+.find-flight-btn {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #1976d2;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.find-flight-btn:hover {
+  background-color: #1976d2;
+  color: white;
+}
+
+.book-btn:hover {
+  background-color: #1976d2;
+  color: white;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.button-container .custom-button {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-container .custom-button[mat-raised-button] {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+.button-container .custom-button[mat-raised-button]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.custom-menu-item {
+  font-size: 15px;
+  font-weight: 400;
 }

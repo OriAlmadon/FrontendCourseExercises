@@ -10,6 +10,10 @@
         <p><strong>Departure Time:</strong> {{ booking.flight.departureDateTime | date: 'short' }}</p>
         <p><strong>Arrival Time:</strong> {{ booking.flight.arrivalDateTime | date: 'short' }}</p>
         <p><strong>Duration:</strong> {{ duration }}</p>
+        <p>
+            <strong>Current Status:</strong> 
+            <span style="margin-left: 10px;" [ngClass]="statusClass(booking.flight.status)">{{ booking.flight.status }}</span>
+        </p>
       </div>
 
       <div class="details-card">

@@ -46,18 +46,13 @@ export class BookingDetailsComponent implements OnInit {
     return `${hours}h ${minutes}m`;
   }
 
-  // getStatusClass(status: string): string {
-  //   switch (status?.toLowerCase()) {  // ✅ Fix: Ensure status is not undefined
-  //     case 'confirmed':
-  //       return 'confirmed';
-  //     case 'pending':
-  //       return 'pending';
-  //     case 'canceled':
-  //       return 'canceled';
-  //     default:
-  //       return '';
-  //   }
-  // }
+  statusClass(status: string): string {
+    return {
+      'On Time': 'status-on-time',
+      'Delayed': 'status-delayed',
+      'Cancelled': 'status-cancelled'
+    }[status] || '';
+  } 
 
   goBack(): void {
     this.router.navigate(['/user/bookings']);

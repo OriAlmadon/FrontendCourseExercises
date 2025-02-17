@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     endOfWeek.setHours(23, 59, 59, 999); // End of the last day of the week
 
     const allFlights = this.flightService
-      .getAll();
+      .getFlights();
     this.lastMinuteFlights = allFlights
       .filter(
         (flight: Flight) =>

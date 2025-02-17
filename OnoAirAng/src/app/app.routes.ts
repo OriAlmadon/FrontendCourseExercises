@@ -9,11 +9,13 @@ import { BookingComponent } from './user/booking/booking.component';
 import { AllFlightsComponent } from './user/all-flights/all-flights.component'; // Import the new component
 import { FlightDetailsComponent } from './flight-details/flight-details.component';
 import { BookingDetailsComponent } from './user/booking-details/booking-details.component';
+import { FlightStatusComponent } from './admin/flight-status/flight-status.component';
 export const routes: Routes = [
   { path: 'booking/:flightNumber', component: BookingComponent },
   { path: 'user/bookings', component: MyBookingsComponent }, // Existing route
   { path: '', component: HomeComponent }, // Home page
   { path: 'admin/flights', component: FlightManagementComponent }, // Flight Management Page
+  { path: 'admin/flights/flight-status/:flightNumber', component: FlightStatusComponent },
   { path: 'destination-management', component: DestinationManagementComponent }, // Destination Management Page
   { path: 'destination-details/:code', component: DestinationDetailsComponent }, // Destination Details Page
   { path: 'user/bookings', component: MyBookingsComponent }, // My Bookings Page
