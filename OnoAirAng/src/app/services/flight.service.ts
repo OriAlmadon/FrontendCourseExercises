@@ -38,8 +38,18 @@ export class FlightService {
     this.flightListSubject.next(flights); // Emit updated flights list
   }
 
-  // Reset to original data on page refresh
+  // Find alternative flights (same route, within ±2 days)
+  findAlternatives(origin: string, destination: string, date: Date): Flight[] {
+    const targetDate = new Date(date);
+    return this.getFlights().filter(flight => {
+      const flightDate = new Date(flight.departureDateTime);
+      const isCloseDate = Math.abs(flightDate.getTime() - targetDate.getTime()) <= 2 * 24 * 60 * 60 * 1000; // ±2 days
+      return flight.departure.code === origin && flight.arrival.code === destination && isCloseDate;
+    });
+  }
+
+  // Reset to original data
   resetFlights(): void {
-    this.flightListSubject.next([...this.originalFlights]); // Reset to original flights
+    this.flightListSubject.next([...this.originalFlights]);
   }
 }

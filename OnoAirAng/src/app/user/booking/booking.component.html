@@ -32,7 +32,12 @@
         <button type="submit" class="submit-booking" [disabled]="bookingForm.invalid">Submit Booking</button>
       </div>
     </form>
-  </div>
+    
+    <!-- Base Price Display -->
+    <div class="price-section">
+      <p><strong>Base Price:</strong> {{ flight.price * passengers.length | currency }}</p>
+    </div>
+
 </div>
 
 <ng-template #notFound>

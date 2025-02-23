@@ -6,7 +6,9 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingService } from '../../services/booking.service';
 import { Booking } from '../../models/booking';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { Flight } from '../../models/flight';
+import { FlightService } from '../../services/flight.service';
 
 @Component({
   selector: 'app-my-bookings',
@@ -19,18 +21,21 @@ export class MyBookingsComponent implements OnInit, AfterViewInit {
   bookings: Booking[] = [];
   futureBookings: Booking[] = [];
   pastBookings: Booking[] = [];
+  alternativeFlights: Flight[] = [];
+  selectedCancelledFlight: Booking | null = null;
 
-  displayedColumns: string[] = ['flightNumber', 'departure', 'arrival', 'departureTime', 'passengers', 'status'];
+  displayedColumns: string[] = ['flightNumber', 'departure', 'arrival', 'departureTime', 'basePrice', 'coupon', 'passengers', 'status'];
 
   futureBookingsDataSource = new MatTableDataSource<Booking>([]);
   pastBookingsDataSource = new MatTableDataSource<Booking>([]);
+  alternativeFlightsDataSource = new MatTableDataSource<Flight>([]);
 
   @ViewChild('futurePaginator') futurePaginator!: MatPaginator;
   @ViewChild('futureSort') futureSort!: MatSort;
   @ViewChild('pastPaginator') pastPaginator!: MatPaginator;
   @ViewChild('pastSort') pastSort!: MatSort;
 
-  constructor(private bookingService: BookingService) { }
+  constructor(private router: Router, private bookingService: BookingService, private flightService: FlightService) { }
 
   ngOnInit(): void {
     this.loadBookings();
@@ -44,7 +49,7 @@ export class MyBookingsComponent implements OnInit, AfterViewInit {
   }
 
   loadBookings(): void {
-    this.bookings = this.bookingService.getAll(); // Fetch bookings
+    this.bookings = this.bookingService.getAll();
 
     const now = new Date();
 
@@ -63,6 +68,19 @@ export class MyBookingsComponent implements OnInit, AfterViewInit {
     this.pastBookingsDataSource.data = this.pastBookings;
   }
 
+  // Find alternative flights
+  showAlternatives(booking: Booking): void {
+    this.selectedCancelledFlight = booking;
+
+    this.alternativeFlights = this.flightService.findAlternatives(
+      booking.flight.departure.code,
+      booking.flight.arrival.code,
+      booking.flight.departureDateTime
+    ).filter(flight => flight.flightNumber !== booking.flight.flightNumber);
+
+    this.alternativeFlightsDataSource.data = this.alternativeFlights;
+  }
+
   getStatusClass(status: string): string {
     switch (status) {
       case 'On Time':
@@ -76,4 +94,7 @@ export class MyBookingsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  bookAlternative(flightNumber: string): void {
+    this.router.navigate(['/booking', flightNumber]);
+  }
 }

@@ -8,4 +8,5 @@ export interface Booking {
     name: string; // Passenger's name
     passportNumber: string; // Passenger's passport number
   }[]; // Array of passengers
+  basePrice: number; // Total price before discounts
 }

@@ -1,5 +1,5 @@
 <div class="flight-management">
-  <h1>✈All Flights</h1>
+  <h1>✈ All Flights</h1>
   <div class="flight-table-container">
     <!-- Search Input -->
     <mat-form-field appearance="outline" class="search-bar">
@@ -7,6 +7,44 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Search by Flight No, Departure, or Arrival">
     </mat-form-field>
 
+    <!-- Date Range Search -->
+    <div class="date-range-form">
+      <form [formGroup]="dateRangeForm">
+        <!-- Exact Date -->
+        <mat-form-field appearance="outline">
+          <mat-label>Exact Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="exactDate" placeholder="Pick a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Flexible Date Range -->
+        <mat-form-field appearance="outline">
+          <mat-label>Flexible Date Range (± X days)</mat-label>
+          <input matInput formControlName="flexibleDateRange" placeholder="e.g. ±3 days">
+        </mat-form-field>
+
+        <!-- Start Date -->
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="Pick start date">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- End Date -->
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="endDate" placeholder="Pick end date">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="onSearch()">Search</button>
+      </form>
+    </div>
+
+    <!-- Flight Table -->
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
       <!-- Flight Number Column -->
       <ng-container matColumnDef="flightNumber">
@@ -46,6 +84,12 @@
       <ng-container matColumnDef="seats">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Seats </th>
         <td mat-cell *matCellDef="let flight"> {{ flight.seats }} </td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let flight"> {{ flight.price }} </td>
       </ng-container>
 
       <!-- Actions Column -->

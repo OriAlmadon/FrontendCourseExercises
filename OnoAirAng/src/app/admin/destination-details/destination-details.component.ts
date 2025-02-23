@@ -22,7 +22,6 @@ export class DestinationDetailsComponent implements OnInit {
     const code = this.route.snapshot.paramMap.get('code');
     if (code) {
       this.destination = destinations.find(d => d.code === code) || null;
-      console.log(this.destination, "-")
     }
   }
 

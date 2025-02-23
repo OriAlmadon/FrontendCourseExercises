@@ -27,11 +27,16 @@ export class BookingService {
   }
 
   // Create a new booking and update the observable list
-  createBooking(flight: Flight, passengers: { name: string; passportNumber: string }[]): Booking {
+  createBooking(
+    flight: Flight,
+    passengers: { name: string; passportNumber: string }[],
+    basePrice: number,
+  ): Booking {
     const newBooking: Booking = {
-      id: this.bookings.length + 1, // Generate a unique ID based on current length
+      id: this.generateUniqueId(),
       flight,
       passengers,
+      basePrice,
     };
 
     this.bookings.push(newBooking); // Add to internal array
@@ -45,7 +50,7 @@ export class BookingService {
     this.bookingsSubject.next([...this.bookings]); // Update the BehaviorSubject with the new list
   }
 
-  // Update a booking (e.g., add or modify passengers) and emit the updated list
+  // Update a booking and emit the updated list
   updateBooking(updatedBooking: Booking): Booking | undefined {
     const index = this.bookings.findIndex(booking => booking.id === updatedBooking.id);
     
@@ -55,5 +60,10 @@ export class BookingService {
       return updatedBooking;
     }
     return undefined;
+  }
+
+  // Generate a unique ID for each booking
+  private generateUniqueId(): number {
+    return this.bookings.length > 0 ? Math.max(...this.bookings.map(b => b.id)) + 1 : 1;
   }
 }

@@ -10,12 +10,18 @@ import { AllFlightsComponent } from './user/all-flights/all-flights.component'; 
 import { FlightDetailsComponent } from './flight-details/flight-details.component';
 import { BookingDetailsComponent } from './user/booking-details/booking-details.component';
 import { FlightStatusComponent } from './admin/flight-status/flight-status.component';
+import { CouponManagementComponent } from './admin/coupon-management/coupon-management.component';
+import { CreateCouponComponent } from './admin/create-coupon/create-coupon.component';
+import { UpdateCouponComponent } from './admin/update-coupon/update-coupon.component';
 export const routes: Routes = [
   { path: 'booking/:flightNumber', component: BookingComponent },
   { path: 'user/bookings', component: MyBookingsComponent }, // Existing route
   { path: '', component: HomeComponent }, // Home page
   { path: 'admin/flights', component: FlightManagementComponent }, // Flight Management Page
   { path: 'admin/flights/flight-status/:flightNumber', component: FlightStatusComponent },
+  { path: 'admin/all-coupons', component: CouponManagementComponent },
+  { path: 'admin/create-coupon', component: CreateCouponComponent },
+  { path: 'admin/update-coupon/:couponCode', component: UpdateCouponComponent },
   { path: 'destination-management', component: DestinationManagementComponent }, // Destination Management Page
   { path: 'destination-details/:code', component: DestinationDetailsComponent }, // Destination Details Page
   { path: 'user/bookings', component: MyBookingsComponent }, // My Bookings Page
@@ -26,5 +32,4 @@ export const routes: Routes = [
   { path: 'user/booking/:flightNumber', component: BookingComponent },
   { path: 'user/all-flights', component: AllFlightsComponent }, 
   { path: 'flight-details/:flightNumber', component: FlightDetailsComponent },
-
 ];

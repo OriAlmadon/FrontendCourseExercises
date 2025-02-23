@@ -8,7 +8,7 @@ import { Destination, destinations } from '../models/destination';
 export class DestinationService {
   private originalDestinations = destinations; // Store original destination data
   private destinationListSubject = new BehaviorSubject<Destination[]>([...this.originalDestinations]);
-  destinationList$ = this.destinationListSubject.asObservable(); // Observable for global access
+  destinationList$ = this.destinationListSubject.asObservable();
 
   // Get all destinations
   getAll(): Destination[] {

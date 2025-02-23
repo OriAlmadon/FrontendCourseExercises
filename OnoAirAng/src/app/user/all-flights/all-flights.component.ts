@@ -10,11 +10,25 @@ import { FlightService } from '../../services/flight.service';
 import { Flight } from '../../models/flight';
 import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-all-flights',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatButtonModule, DatePipe],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    DatePipe,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './all-flights.component.html',
   styleUrls: ['./all-flights.component.css'],
 })
@@ -26,6 +40,7 @@ export class AllFlightsComponent implements OnInit, AfterViewInit {
     'departureTime',
     'arrivalTime',
     'seats',
+    'price',
     'actions',
   ];
   dataSource = new MatTableDataSource<Flight>([]);
@@ -33,7 +48,17 @@ export class AllFlightsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private flightService: FlightService, private router: Router) {}
+  dateRangeForm: FormGroup;
+
+  constructor(private flightService: FlightService, private router: Router) {
+    // Initializing the form group with default values
+    this.dateRangeForm = new FormGroup({
+      exactDate: new FormControl(null),
+      flexibleDateRange: new FormControl(null, [Validators.pattern('^[+-]?\\d+$')]),
+      startDate: new FormControl(null),
+      endDate: new FormControl(null),
+    });
+  }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -63,5 +88,48 @@ export class AllFlightsComponent implements OnInit, AfterViewInit {
 
   bookFlight(flightNumber: string): void {
     this.router.navigate(['/booking', flightNumber]);
+  }
+
+  onSearch(): void {
+    const formValues = this.dateRangeForm.value;
+
+    let filterFlights = this.flightService.getFlights();
+
+    if (formValues.exactDate) {
+      const exactDate = new Date(formValues.exactDate);
+      filterFlights = filterFlights.filter(flight => {
+        const departureDate = new Date(flight.departureDateTime);
+        return departureDate.toDateString() === exactDate.toDateString();
+      });
+    } else if (formValues.flexibleDateRange) {
+      const range = parseInt(formValues.flexibleDateRange, 10);
+      const currentDate = new Date();
+      const minDate = new Date(currentDate.setDate(currentDate.getDate() - range));
+      const maxDate = new Date(currentDate.setDate(currentDate.getDate() + range));
+
+      filterFlights = filterFlights.filter(flight => {
+        const departureDate = new Date(flight.departureDateTime);
+        return departureDate >= minDate && departureDate <= maxDate;
+      });
+    } else if (formValues.startDate && formValues.endDate) {
+      const startDate = new Date(formValues.startDate);
+      const endDate = new Date(formValues.endDate);
+
+      if (startDate > endDate) {
+        alert('End date cannot be before start date.');
+        return;
+      }
+
+      filterFlights = filterFlights.filter(flight => {
+        const departureDate = new Date(flight.departureDateTime);
+        return departureDate >= startDate && departureDate <= endDate;
+      });
+    }
+
+    if (filterFlights.length === 0) {
+      alert('No flights found for the chosen dates.');
+    } else {
+      this.dataSource.data = filterFlights;
+    }
   }
 }

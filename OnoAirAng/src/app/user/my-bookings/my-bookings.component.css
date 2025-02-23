@@ -93,3 +93,13 @@ ul {
 .status-cancelled {
   background-color: red;
 }
+
+.book-btn {
+  margin-left: 5px;
+  padding: 10px 20px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

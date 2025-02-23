@@ -50,7 +50,6 @@ export class LastMinuteFlightsComponent implements OnInit {
 
   // Define the bookFlight method
   bookFlight(flightNumber: string): void {
-    console.log(`Booking flight: ${flightNumber}`);
-    // Add your booking logic here
+    this.router.navigate(['/booking', flightNumber]);
   }
 }

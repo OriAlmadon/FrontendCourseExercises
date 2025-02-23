@@ -1,91 +1,104 @@
-/* Container Styling */
+/* Updated Styling for a Modern Look */
 .booking-container {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   min-height: 65vh;
   background-color: #f0f4f8;
   padding: 20px;
 }
 
-/* Booking Card */
 .booking-card {
   max-width: 600px;
   width: 100%;
   background: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Headings */
-h1,
-h2,
-h3 {
-  color: #1976d2;
-  font-weight: 600;
+.booking-card:hover {
+  transform: translateY(-5px);
+}
+
+h1, h2, h3 {
+  color: #1565c0;
+  font-weight: 700;
   margin-bottom: 15px;
 }
 
-/* Flight Details */
 .flight-details {
-  background: #e3f2fd;
+  background: rgba(25, 118, 210, 0.1);
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 20px;
   text-align: left;
 }
 
 p {
-  margin: 5px 0;
-  font-size: 16px;
-}
-
-/* Passenger Card */
-.passenger-card {
-  background: #fafafa;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-left: 4px solid #1976d2;
-  border-radius: 8px;
-  text-align: left;
-}
-
-/* Labels */
-label {
-  display: block;
-  font-weight: bold;
-  margin-top: 10px;
-  font-size: 14px;
+  margin: 8px 0;
+  font-size: 17px;
   color: #333;
 }
 
-/* Input Fields */
-input {
-  width: 90%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
+.passenger-card {
+  background: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #1565c0;
+  border-radius: 8px;
+  text-align: left;
   transition: all 0.3s;
+}
+
+.passenger-card:hover {
+  background: #e3f2fd;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #444;
+}
+
+input {
+  width: 95%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
 }
 
 input:focus {
-  border-color: #1976d2;
+  border-color: #1565c0;
   outline: none;
-  box-shadow: 0px 0px 5px rgba(25, 118, 210, 0.3);
+  box-shadow: 0px 0px 8px rgba(25, 118, 210, 0.3);
 }
 
-/* Buttons */
 button {
   padding: 12px 20px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s;
+  font-weight: bold;
+}
+
+.apply-coupon {
+  margin-top: 20px;
+  background-color: #43a047;
+  color: white;
+}
+
+.apply-coupon:hover {
+  background-color: #388e3c;
 }
 
 .add-passenger {
@@ -99,7 +112,7 @@ button {
 }
 
 .submit-booking {
-  background-color: #1976d2;
+  background-color: #1565c0;
   color: white;
 }
 
@@ -112,12 +125,21 @@ button {
   cursor: not-allowed;
 }
 
-/* Error Message */
+.price-section {
+  background: #f1f8e9;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 25px;
+  font-weight: bold;
+  color: #2e7d32;
+  text-align: center;
+}
+
 .error-message {
   background: #ffdddd;
   color: #d8000c;
-  padding: 10px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
   margin-bottom: 15px;
   font-weight: bold;
 }
@@ -130,17 +152,14 @@ button {
 
 .snackbar-success {
   background-color: #4caf50;
-  /* Green */
   color: white;
 }
 
 .snackbar-error {
   background-color: #f44336;
-  /* Red */
   color: white;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .booking-card {
     padding: 20px;
