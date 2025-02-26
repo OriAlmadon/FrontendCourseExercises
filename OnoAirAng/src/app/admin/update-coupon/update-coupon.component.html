@@ -1,0 +1,63 @@
+<div class="update-coupon-container">
+    <h2 class="header-title">Update Coupon</h2>
+  
+    <!-- Coupon form -->
+    <div class="form-container">
+      <!-- Only show the form if coupon is loaded -->
+      <form (ngSubmit)="onSubmit()" #couponForm="ngForm" *ngIf="coupon">
+        <mat-card class="coupon-card">
+          <mat-card-content>
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Coupon Code</mat-label>
+              <input matInput [(ngModel)]="coupon.code" name="code" required disabled />
+              <mat-error *ngIf="couponForm.controls['code']?.invalid && couponForm.controls['code']?.touched">Coupon code is required.</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Discount Percentage</mat-label>
+              <input matInput [(ngModel)]="coupon.discountPercentage" name="discountPercentage" required type="number" [min]="1" [max]="100" />
+              <mat-error *ngIf="couponForm.controls['discountPercentage']?.invalid && couponForm.controls['discountPercentage']?.touched">
+                Discount percentage is required and must be between 1 and 100.
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="coupon.startDate" name="startDate" required />
+              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+              <mat-error *ngIf="couponForm.controls['startDate']?.invalid && couponForm.controls['startDate']?.touched">Start date is required.</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="coupon.endDate" name="endDate" required />
+              <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+              <mat-error *ngIf="couponForm.controls['endDate']?.invalid && couponForm.controls['endDate']?.touched">End date is required.</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Remaining Uses</mat-label>
+              <input matInput [(ngModel)]="coupon.remainingUses" name="remainingUses" required type="number" [min]="1" />
+              <mat-error *ngIf="couponForm.controls['remainingUses']?.invalid && couponForm.controls['remainingUses']?.touched">
+                Remaining uses must be a positive number.
+              </mat-error>
+            </mat-form-field>
+  
+            <div class="form-actions">
+              <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="couponForm.invalid">
+                Update Coupon
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </div>
+  
+    <!-- Display an error message if coupon is not found -->
+    <div *ngIf="!coupon" class="coupon-not-found">
+      <p>Coupon not found. Please try again later.</p>
+    </div>
+</div>
+  

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Booking } from '../models/booking';
 import { Flight } from '../models/flight';
+import { Coupon } from '../models/coupon';
 
 @Injectable({
   providedIn: 'root',
@@ -26,17 +27,19 @@ export class BookingService {
     return this.getAll().find(booking => booking.flight.flightNumber === flightNumber);
   }
 
-  // Create a new booking and update the observable list
+  // Create a new booking with optional coupon and update the observable list
   createBooking(
     flight: Flight,
     passengers: { name: string; passportNumber: string }[],
     basePrice: number,
+    coupon?: Coupon
   ): Booking {
     const newBooking: Booking = {
       id: this.generateUniqueId(),
       flight,
       passengers,
       basePrice,
+      coupon, // Coupon is optional
     };
 
     this.bookings.push(newBooking); // Add to internal array

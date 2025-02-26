@@ -1,0 +1,61 @@
+<div class="coupon-container">
+    <h2 class="header-title">Coupon Management</h2>
+    
+    <!-- Add Coupon Button -->
+    <div class="action-container">
+      <button mat-raised-button color="primary" (click)="openAddCoupon()" class="add-coupon-btn">
+        Add Coupon
+      </button>
+    </div>
+    
+    <!-- Coupon Table -->
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+          <td mat-cell *matCellDef="let coupon">{{ coupon.code }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="discountPercentage">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount (%) </th>
+          <td mat-cell *matCellDef="let coupon">{{ coupon.discountPercentage }}%</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+          <td mat-cell *matCellDef="let coupon">{{ coupon.startDate | date }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+          <td mat-cell *matCellDef="let coupon">{{ coupon.endDate | date }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="remainingUses">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Remaining Uses </th>
+          <td mat-cell *matCellDef="let coupon">{{ coupon.remainingUses }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let coupon">
+            <!-- Edit and Delete Buttons -->
+            <div class="action-buttons">
+              <button mat-icon-button color="accent" (click)="openEditCoupon(coupon)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteCoupon(coupon.code)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <!-- Pagination Controls -->
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
+  

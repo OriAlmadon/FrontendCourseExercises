@@ -32,12 +32,23 @@
         <button type="submit" class="submit-booking" [disabled]="bookingForm.invalid">Submit Booking</button>
       </div>
     </form>
+    <!-- Discounted Price Display (if coupon applied) -->
+    <div *ngIf="discountedPrice !== null" class="price-section">
+      <p><strong>Discounted Price:</strong> {{ discountedPrice | currency }}</p>
+    </div>
     
     <!-- Base Price Display -->
     <div class="price-section">
       <p><strong>Base Price:</strong> {{ flight.price * passengers.length | currency }}</p>
     </div>
-
+    <!-- Coupon Code Section -->
+    <div class="coupon-section">
+      <label>Coupon Code:</label>
+      <input type="text" [(ngModel)]="couponCode" name="couponCode" placeholder="Enter coupon code" />
+      <button type="button" (click)="applyCoupon()" class="apply-coupon">Apply</button>
+      <div *ngIf="couponError" class="error-text">{{ couponError }}</div>
+    </div>
+  </div>
 </div>
 
 <ng-template #notFound>

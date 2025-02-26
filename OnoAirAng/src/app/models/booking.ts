@@ -1,4 +1,5 @@
 import { Flight } from './flight'; // Ensure the path to 'flight.ts' is correct
+import { Coupon } from './coupon'; // Ensure the path to 'coupon.ts' is correct
 
 // Define the Booking interface
 export interface Booking {
@@ -9,4 +10,5 @@ export interface Booking {
     passportNumber: string; // Passenger's passport number
   }[]; // Array of passengers
   basePrice: number; // Total price before discounts
+  coupon?: Coupon;
 }

@@ -8,6 +8,8 @@ import { FlightService } from '../../services/flight.service';
 import { Flight } from '../../models/flight';
 import { Booking } from '../../models/booking';
 import { NotificationService } from '../../services/notification.service';
+import { CouponsService } from '../../services/coupon.service';
+import { Coupon } from '../../models/coupon';
 
 @Component({
   selector: 'app-booking',
@@ -22,6 +24,9 @@ export class BookingComponent implements OnInit {
   passengers: { name: string; passportNumber: string }[] = [];
   newBooking: Booking | null = null;
   errorMessage: string = '';
+  couponCode: string = '';
+  couponError: string = '';
+  appliedCoupon: Coupon | null = null;
   discountedPrice: number | null = null;
   basePrice: number = 0;
 
@@ -31,6 +36,7 @@ export class BookingComponent implements OnInit {
     private flightService: FlightService,
     private bookingService: BookingService,
     private notificationService: NotificationService,
+    private couponService: CouponsService
   ) { }
 
   ngOnInit(): void {
@@ -59,6 +65,35 @@ export class BookingComponent implements OnInit {
     if (!this.flight) return;
     
     this.basePrice = this.flight.price * this.passengers.length;
+
+    if (this.appliedCoupon) {
+      const discountAmount = (this.basePrice * this.appliedCoupon.discountPercentage) / 100;
+      this.discountedPrice = this.basePrice - discountAmount;
+    } else {
+      this.discountedPrice = this.basePrice;
+    }
+  }
+
+  applyCoupon(): void {
+    if (!this.couponCode) {
+      this.couponError = 'Please enter a coupon code.';
+      return;
+    }
+
+    const coupon = this.couponService.getValidCoupon(this.couponCode);
+
+    if (!coupon) {
+      this.couponError = 'Invalid or expired coupon.';
+      return;
+    }
+
+    if (coupon.remainingUses <= 0) {
+      this.couponError = 'This coupon has no remaining uses.';
+      return;
+    }
+
+    this.appliedCoupon = coupon;
+    this.couponError = '';
     this.calculatePrice();
   }
 
@@ -106,7 +141,12 @@ export class BookingComponent implements OnInit {
       this.flight,
       this.passengers,
       this.basePrice,
+      this.appliedCoupon || undefined
     );
+
+    if (this.appliedCoupon) {
+      this.couponService.decrementCouponUsage(this.appliedCoupon.code);
+    }
 
     this.notificationService.showSuccess('Booking successful!');
     this.router.navigate(['/user/bookings']);
